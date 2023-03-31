@@ -1,0 +1,8 @@
+{% extends "base.html" %} 
+{% block content %}
+<h3>Register here</h3>
+<form method="POST">
+  {% csrf_token %} {{ user_form.as_p }}
+  <input type="submit" value="Register" />
+</form>
+{% endblock %}
