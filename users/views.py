@@ -3,7 +3,8 @@ from django.shortcuts import redirect, render
 from .forms import LoginForm, RegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
+from .models import Profile
+from .forms import UserEditForm, ProfileEditForm
 
 
 def loginView(request):
@@ -14,7 +15,8 @@ def loginView(request):
             # clean the data first
             data = form.cleaned_data
             # authenticate the user
-            user = authenticate(request, username=data['username'], password=data['password'])
+            user = authenticate(
+                request, username=data['username'], password=data['password'])
             # check if the user is present
             if user is not None:
                 login(request, user)
@@ -28,10 +30,10 @@ def loginView(request):
     }
     return render(request, 'users/login.html', context)
 
+
 @login_required
 def homePage(request):
     return render(request, "users/index.html")
-
 
 
 def register(request):
@@ -42,8 +44,33 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            # this creates a new user profile as soon a user registers
+            Profile.objects.create(user=new_user)
             return render(request, 'users/register_done.html')
     else:
         user_form = RegistrationForm()
-        
+
     return render(request, 'users/register.html', {"user_form": user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        data = request.POST
+        user_form = UserEditForm(instance=request.user, data=data)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile, data=data, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, 'users/edit_success.html')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form
+        }
+
+    return render(request, 'users/edit.html', context)
