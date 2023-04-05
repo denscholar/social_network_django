@@ -1,39 +1,40 @@
 {% extends "base.html" %} 
+{% load static %}
+{% load widget_tweaks %}
 {% block content %}
-<h3>Register here</h3>
-<form method="POST">
-  {% csrf_token %} {{ user_form.as_p }}
-  <input type="submit" value="Register" />
-</form>
 
-<div class="h-screen bg-gray-200 py-20 p-4 md:p-20 lg:p-32">
-  <div class="max-w-sm bg-white rounded-lg overflow-hidden shadow-lg mx-auto">
-      <div class="p-6">
-          <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome Back!</h2>
-          <p class="text-gray-700 mb-6">Please sign in to your account</p>
-          <form>
-              <div class="mb-4">
-                  <label class="block text-gray-700 font-bold mb-2" for="username">
-          Username
-        </label>
-                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
-              </div>
-              <div class="mb-6">
-                  <label class="block text-gray-700 font-bold mb-2" for="password">
-          Password
-        </label>
-                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password">
-              </div>
-              <div class="flex items-center justify-between">
-                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-          Sign In
-        </button>
-                  <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                      Forgot Password?
-                  </a>
-              </div>
-          </form>
+
+<div class="">
+  <div class="row">
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Register Here</h1>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            {% render_field user_form.username class='form-control' placeholder='username' %}
+          </div>
+          <div class="form-group mb-4">
+            {% render_field user_form.email class='form-control' placeholder='enter your email' %}
+          </div>
+          <div class="form-group mb-4">
+            {% render_field user_form.first_name class='form-control' placeholder='enter your First Name' %}
+          </div>
+          <div class="form-group mb-4">
+            {% render_field user_form.password class='form-control' placeholder='enter your preferred password' %}
+          </div>
+          <div class="form-group mb-4">
+            {% render_field user_form.password2 class='form-control' placeholder='confirm password' %}
+          </div>
+          <button type="submit" id="login" class="btn btn-block login-btn">Submit</button>
+          {{form.errors}}
+        </form>
+        <p class="login-wrapper-footer-text">Already have an account? <a href="{% url 'login' %}" class="text-reset">Login here</a></p>
       </div>
+    </div>
+    <div class="col-sm-6 px-0 d-none d-sm-block">
+      <img src="{% static 'assets/images/login.jpg' %}" alt="login image" class="login-img">
+    </div>
   </div>
 </div>
 {% endblock %}

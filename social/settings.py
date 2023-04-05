@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "posts",
     # Third party package
     'compressor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

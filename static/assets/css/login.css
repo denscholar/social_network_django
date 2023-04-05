@@ -1,8 +1,19 @@
 body {
   font-family: "Karla", sans-serif;
   background-color: #fff;
-  overflow: hidden;
+  /* overflow: hidden; */
   min-height: 100vh; }
+
+  input#id_username, #id_email, #id_first_name, #id_password, #id_password2{
+    padding: 20px;
+    border-color: #ff80ff;
+    border: 1px solid rgb(170, 167, 167);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  input#id_username, #id_email, #id_first_name, #id_password, #id_password2:focus{
+    outline: none !important;
+  }
 
 .brand-wrapper {
   padding-top: 7px;
@@ -11,6 +22,11 @@ body {
     height: 25px; }
 
 .login-section-wrapper {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 40px !important;
+  margin: 0 auto !important;
+  padding-bottom: 0 !important;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -20,8 +36,17 @@ body {
   background-color: #fff; }
   @media (max-width: 991px) {
     .login-section-wrapper {
-      padding-left: 50px;
-      padding-right: 50px; } }
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 0;
+    }
+    /* .col-sm-6.login-section-wrapper{
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 0;
+    } */
+  
+  }
   @media (max-width: 575px) {
     .login-section-wrapper {
       padding-top: 20px;
@@ -29,11 +54,15 @@ body {
       min-height: 100vh; } }
 
 .login-wrapper {
-  width: 300px;
+  width: 400px;
+  margin: 0 auto !important;
   max-width: 100%;
   padding-top: 24px;
   padding-bottom: 24px; }
   @media (max-width: 575px) {
+    .login-wrapper.my-auto{
+      margin-top: 40px !important;
+    }
     .login-wrapper {
       width: 100%; } }
   .login-wrapper label {
@@ -49,11 +78,14 @@ body {
     font-size: 18px;
     font-weight: normal; }
     .login-wrapper .form-control::-webkit-input-placeholder {
-      color: #b0adad; }
+      color: #b0adad; 
+    }
     .login-wrapper .form-control::-moz-placeholder {
-      color: #b0adad; }
+      color: #b0adad; 
+    }
     .login-wrapper .form-control:-ms-input-placeholder {
-      color: #b0adad; }
+      color: #b0adad; 
+    }
     .login-wrapper .form-control::-ms-input-placeholder {
       color: #b0adad; }
     .login-wrapper .form-control::placeholder {
@@ -75,7 +107,7 @@ body {
     font-size: 14px;
     text-decoration: underline;
     display: inline-block;
-    margin-bottom: 54px; }
+    margin-bottom: 10px !important; }
     @media (max-width: 575px) {
       .login-wrapper a.forgot-password-link {
         margin-bottom: 16px; } }
